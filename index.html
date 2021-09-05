@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practica Teoría 1</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <style>
+        body{
+            background-image: url('img/HTML-1-1.jpg');
+        }
+    .carrito{
+        height: 128px;
+        width: 138px;
+        float: left;
+        background: url("img/carrito_sprite.png");
+        margin: 0 auto;
+        /*background-position: -280px 0;*/
+        animation: correr 0.1s steps(8) infinite;
+    }
+
+    .fondo{
+        height: 600px;
+        width: 600px;
+        position: relative;
+        margin: 0 auto;
+        background: url("img/fondo.png");
+        animation: animarFondo 3s infinite;
+    }
+
+    @keyframes correr{
+        0%{
+            background-position: 0px;
+        }
+        100%{
+            background-position: -996px;
+        }
+    }
+    </style>
+    <script>
+        function calcular()
+        {
+            let seg_vehi=5;
+            let segVerde_hori=0;
+            let segVerde_verti=0;
+            let mayor_verti=0;
+            let mayor_hori=0;
+
+            let vehNS=parseFloat(document.getElementById("vehiculosNS").value);
+            let vehSN=parseFloat(document.getElementById("vehiculosSN").value);
+            let vehOE=parseFloat(document.getElementById("vehiculosOE").value);
+            let vehEO=parseFloat(document.getElementById("vehiculosEO").value);
+            
+            let v_verti=vehNS+vehSN
+            let v_hori=vehOE+vehEO
+            
+            if (vehSN>=vehNS) {
+                mayor_verti=vehSN                   
+            }else{
+                mayor_verti=vehNS
+            }
+            
+            
+            if (vehOE>=vehEO) {
+                mayor_hori=vehOE
+            }else{
+                mayor_hori=vehEO
+            }
+
+            segVerde_hori=segVerde_hori+(seg_vehi*mayor_hori)
+            segVerde_verti=segVerde_verti+(seg_vehi*mayor_verti)
+
+            document.semaforo.verti.value=segVerde_verti;
+            document.semaforo.hori.value=segVerde_hori;
+        }
+    </script>
+    
+    
+</head>
+<body>
+   
+    <div class="container" style="height: 100px;"></div>
+    <div class="container" style="height: 60px ;width: 70%; background-color: rgba(161, 158, 159, 0.616);">
+        <h1 style="text-align: center; color: white;">Semáforos Inteligentes, una solución eficaz</h1>
+    </div>
+    <div class="principal">
+        <div class="container" >
+            
+            <div class="container" id="a1">
+                <form action="" name="semaforo">
+                    <table border="2" align="center">
+                        <tr>
+                            <td style="text-align: center;">N° vehiculos de Norte a Sur</td>
+                            <td>
+                                <input type="number" name="vehiculosNS" id="vehiculosNS" 
+                                min="0" max="50" pattern="[0-9]" required placeholder="Ingrese el número de autos">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;"> N° vehículos de Sur a Norte</td>
+                            <td>
+                                <input type="number" name="vehiculosSN" id="vehiculosSN" min="0" max="50" pattern="[0-9]"
+                                 required placeholder="Ingrese el número de autos"> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;"> N° vehículos de Oeste a Este</td>
+                            <td> <input type="number" name="vehiculosOE" id="vehiculosOE" min="0" max="50" pattern="[0-9]"
+                                 required placeholder="Ingrese el número de autos"> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;"> N° vehículos de Este a Oeste</td>
+                            <td> <input type="number" name="vehiculosEO" id="vehiculosEO" min="0" max="50" pattern="[0-9]"
+                                 required placeholder="Ingrese el número de autos"> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="button" name="calculo_tiempo" value="calcular el tiempo adicional" onclick="calcular()"></td>
+                        </tr>
+                        <tr>
+                            <td>Luz Verde</td>
+                        </tr>
+                        <tr>
+                            <td>Segundos en vía vertical</td>
+                            <td><input type="number" name="verti" id="verti" readonly="true"></td>
+                        </tr>
+                        <tr>
+                            <td>Segundos en vía horizontal</td>
+                            <td><input type="number" name="hori" id="hori" readonly="true"></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            
+            <div class="container" id="a2">
+                <main >
+                    <div>
+                        <img src="./img/desligado.png" id='img' >
+                    </div>
+                    <div id='buttons'>
+                        <button id='red' class="button" >Rojo</button>
+                        <button id='yellow' class="button" >Amarillo</button>
+                        <button id='green' class="button" >Verde</button>
+                        <button name='teste' id='automatic' class="button" >Automático</button>
+                    </div>
+                </main>
+            </div>
+            
+        </div>
+        <div>
+            <div class="container fondo" id="fond0">
+                <div class="container" style="height:200px; float: left; width: 190px;"></div>
+                <div class="container" style="height:200px; float: left; width: 190px;"></div>
+                <div class="container" style="height:200px; float: right;  width:190px;"></div>
+                <div class="container" style="height:70px; float: left;  width: 580px;"></div>               
+                <div class="carrito"></div>
+                </div>
+            
+        </div>
+        <div class="container" style="height: 250px;" ></div>
+        <div class="container" style="float: left; width: 400px; background-color: rgb(253, 241, 211); margin: 30px; " >
+            
+                El objetivo del semáforo es agilizar el tránsito en calles muy concurridas, 
+                para lograr esto calcula cuantos autos se 
+                encuentran en cada carril y así dar paso a aquel en el que se encuentre 
+                la mayor cantidad de vehículos para lograr esto aumentará
+                un tiempo de 5 segundos por cada vehículo.
+            
+        </div>
+    </div>
+    
+    <script src="js/semaforo.js"></script>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/pooper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>
+
